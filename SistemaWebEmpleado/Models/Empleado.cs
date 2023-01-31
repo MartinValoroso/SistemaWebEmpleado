@@ -1,5 +1,7 @@
-﻿using System;
+﻿using SistemaWebEmpleado.Validations;
+using System;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SistemaWebEmpleado.Models
 {
@@ -8,15 +10,23 @@ namespace SistemaWebEmpleado.Models
     {
         // Empleado (Id- Nombre-Apellido-DNI-Legajo-FechaNacimiento y Título) 
         public int Id { get; set; }
-
-        [Required]
+        [Column(TypeName = "varchar(50)")]
+        [Required(ErrorMessage = "Campo obligatorio")]
         public string Nombre { get; set; }
-        [Required]
+
+        [Column(TypeName = "varchar(50)")]
+        [Required(ErrorMessage = "Campo obligatorio")]
         public string Apellido { get; set; }
+
         public int DNI { get; set; }
+        [RegularExpression("[a-zA-Z]{2}[1-9]{5}$")]
         public int Legajo { get; set; }
+
+        [CheckValidYear]
         public DateTime FechaNacimiento { get; set; }
-        [Required]
+
+        [Column(TypeName = "varchar(50)")]
+        [Required(ErrorMessage = "Campo obligatorio")]
         public string Titulo { get; set; }
 
 
